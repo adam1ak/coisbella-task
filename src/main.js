@@ -1,6 +1,7 @@
 import './scss/main.scss'
 import { fetchProducts } from './js/api.js'
 import { populateCategories, updateProductsCount } from './js/ui.js'
+import { state } from './js/state.js'
 
 console.log("Main js loaded")
 
@@ -17,13 +18,15 @@ async function init() {
         loader.classList.remove("hidden")
         errorMessage.classList.add("hidden")
 
-        const products = await fetchProducts()
+        const fetchedData = await fetchProducts()
 
-        console.log("Products fetched successfully: ")
-        console.log(products)
+        state.products = fetchedData
+        state.filteredProducts = fetchedData
 
-        populateCategories(products)
-        updateProductsCount(products.length)
+        console.log("Application state initialized successfully:", state)
+
+        populateCategories(state.products)
+        updateProductsCount(state.filteredProducts.length)
 
         loader.classList.add("hidden")
     } catch (error) {
