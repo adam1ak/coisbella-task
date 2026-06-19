@@ -1,13 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Catalog</title>
+    <meta name="description" content="Zadanie rekrutacyjne dla Cosibella">
+    <title>Katalog produktów</title>
 </head>
+
 <body>
-    <div id="app"></div>
+    <!-- Modal -->
+    <div id="product-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+        aria-hidden="true">
+        <div class="modal-content">
+            <button id="close-modal-btn" aria-label="Zamknij szczegóły">&times;</button>
+            <h2 id="modal-tite">Szczegóły prduktu</h2>
+            <div id="modal-body">
+                <!-- Js modal injection -->
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <h1>Katalog produktów</h1>
+        <p>Found 00 products</p>
+
+        <div>divider</div>
+    </header>
+
+    <main>
+        <!-- filter section -->
+        <section class="filters-section" aria-label="Filtry produktow">
+            <div class="filter-group">
+                <label for="category-select">Kategoria</label>
+                <select id="category-select">
+                    <option value="">Wszystkie kategorie</option>
+                    <!-- js dynamic options -->
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="price-min">Cena (PLN)</label>
+                <input type="number" id="price-min" min="0" placeholder="od">
+
+                <label for="price-max" class="sr-only">Cena do (PLN)</label>
+                <input type="number" id="price-max" min="0" placeholder="do">
+            </div>
+
+            <button id="reset-btn">
+                Resetuj filtry
+            </button>
+        </section>
+
+        <!-- status container -->
+        <section id="status-container" aria-live="polite">
+            <div id="loader" class="hidden">Wczytywanie produktow</div>
+            <div id="error-message" class="hidden">Wystapil blad podczas ładowania danych.</div>
+            <div id="nore-results" class="hidden">Nie moglismy znaleźć produktów, których szukasz</div>
+        </section>
+
+        <!-- Lista produktow -->
+        <section class="products-section" aria-label="Lista produktow">
+            <div id="products-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <nav class="pagination-nav" aria-label="Nawigacja stronami">
+            <div id="pagination-container"></div>
+        </nav>
+    </footer>
 
     <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
