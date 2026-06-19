@@ -3,7 +3,17 @@ import { fetchProducts } from './api.js'
 
 console.log("Main js loaded")
 
-fetchProducts()
+async function init() {
+    try {
+        const products = await fetchProducts()
+        
+        console.log("Products fetched successfully: ")
+        console.log(products)
+    } catch (error) {
+        console.log("Initialization failed in main.js: ", error)
 
-const appDiv = document.getElementById("app")
-appDiv.innerHTML = "<h1>Works</h1>"
+        // user error display
+    }
+}
+
+init()
