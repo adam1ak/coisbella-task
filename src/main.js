@@ -13,6 +13,51 @@ function debounce(fun, delay = 300) {
     }
 }
 
+function syncStateToURL() {
+    const url = new URL(window.location)
+
+    if (state.filters.category) {
+        url.searchParams.set("category", state.filters.category)
+    } else {
+        url.searchParams.delete("category")
+    }
+    if (state.filters.minPrice) {
+        url.searchParams.set("minPrice", state.filters.minPrice)
+    } else {
+        url.searchParams.delete("minPrice")
+    }
+    if (state.filters.maxPrice) {
+        url.searchParams.set("maxPrice", state.filters.maxPrice)
+    } else {
+        url.searchParams.delete("maxPrice")
+    }
+
+    if (state.pagination.currentPage > 1) {
+        url.searchParams.set("page", state.pagination.currentPage)
+    } else {
+        url.searchParams.delete("page")
+    }
+
+    window.history.pushState({}, "", url)
+}
+
+function readStateFromURL() {
+    const params = new URLSearchParams(window.location.search)
+
+    state.filters.category = params.get("category") || ""
+    state.filters.minPrice = params.get("minPrice") || ""
+    state.filters.maxPrice = params.get("maxPrice") || ""
+    state.pagination.currentPage = parseInt(params.get("page")) || 1
+
+    const categorySelect = document.getElementById("category-select")
+    const priceMinInput = document.getElementById("price-min")
+    const priceMaxInput = document.getElementById("price-max")
+
+    if (categorySelect) categorySelect.value = state.filters.category
+    if (priceMinInput) priceMinInput.value = state.filters.minPrice
+    if (priceMaxInput) priceMaxInput.value = state.filters.maxPrice
+}
+
 function updateDisplay() {
     const { currentPage, itemsPerPage } = state.pagination
 
@@ -24,9 +69,11 @@ function updateDisplay() {
     renderProducts(productsToRender)
     updateProductsCount(state.filteredProducts.length)
     renderPagination(state.filteredProducts.length, itemsPerPage, currentPage)
+
+    syncStateToURL()
 }
 
-function applyFilters() {
+function applyFilters(resetPage = true) {
     state.filteredProducts = state.products.filter((product) => {
         const matchCategory = state.filters.category === "" || product.category === state.filters.category
 
@@ -45,7 +92,8 @@ function applyFilters() {
 
     console.log("Filters aplied: ", state.filteredProducts)
 
-    state.pagination.currentPage = 1
+    if (resetPage) state.pagination.currentPage = 1
+
     updateDisplay()
 }
 
@@ -132,7 +180,9 @@ async function init() {
 
         populateCategories(state.products)
 
-        updateDisplay()
+        readStateFromURL()
+        applyFilters(false)
+
         setupFilterListeners()
         setupPaginationListener()
 
