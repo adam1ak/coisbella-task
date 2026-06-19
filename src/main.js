@@ -1,5 +1,6 @@
 import './scss/main.scss'
-import { fetchProducts } from './api.js'
+import { fetchProducts } from './js/api.js'
+import { populateCategories, updateProductsCount } from './js/ui.js'
 
 console.log("Main js loaded")
 
@@ -20,6 +21,9 @@ async function init() {
 
         console.log("Products fetched successfully: ")
         console.log(products)
+
+        populateCategories(products)
+        updateProductsCount(products.length)
 
         loader.classList.add("hidden")
     } catch (error) {
