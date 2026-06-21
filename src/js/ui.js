@@ -69,7 +69,7 @@ export function renderProducts(products) {
 
     const cardsHTML = products.map((product) => {
         return `
-            <artice class="product-card" data-id="${product.id}">
+            <article class="product-card" data-id="${product.id}">
                 <div class="product-card__content">
                     <span class="product-card__id">#${product.id}</span>
                     <h3 class="product-card__title">${product.name}</h3>
@@ -147,11 +147,52 @@ export function renderModalContent(product) {
         currency: "PLN"
     })
 
+    const tagsSectionHTML = product.tags && Array.isArray(product.tags) && product.tags.length > 0
+        ? `
+            <div class="modal__tags-container">
+                ${product.tags.map(tag => `<span class="modal__tag">${tag} </span>`).join("")}
+            </div>
+        `
+        : ""
+
     modal.innerHTML = `
-        <div class="modal-content" style="background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: 100px auto; position: relative;">
-            <button class="modal-close-btn" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</button>
-            <p>Nazwa z API: <strong>${product.name}</strong></p>
-            <p>Odczytane ID: #${product.id}</p>
+        <div class="modal__content" role="document">
+            <div class="modal__header">
+                <button class="modal__close-btn" aria-label="Zamknij szczegóły">&times;</button>
+            
+                <div class="modal__meta-row">
+                    <p class="modal__category">${product.category}</p>
+                    <span class="modal__meta-id">#${product.id}</span>
+                </div>
+                
+                <h2 class="modal__title">${product.name}</h2>
+            </div>
+
+            <div class="modal__body">
+                <h3 class="modal__price">${priceFormatter.format(product.price)}</h3>
+
+                <div class="modal__info-group">
+                    <p class="modal__label">ID produktu</p>
+                    <p class="modal__value">${product.id}</p>
+                </div>
+
+                <div class="modal__info-group">
+                    <p class="modal__label">Kategoria</p>
+                    <p class="modal__value">${product.category}</p>
+                </div>
+
+                <div class="modal__info-group">
+                    <p class="modal__label">Opis</p>
+                    <p class="modal__value">${product.description || "Brak opisu dla tego produktu."}</p>
+                </div>
+
+                <div class="modal__info-group">
+                    <p class="modal__label">Stan magazynowy</p>
+                    <p class="modal__value">${product.stock ? "Dostępny" : "Niedostępny"}</p>
+                </div>
+
+                ${tagsSectionHTML}
+            </div>
         </div>
     `
 }

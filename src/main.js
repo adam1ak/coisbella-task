@@ -140,7 +140,7 @@ function setupModalCloseListeners() {
     }
 
     modal.addEventListener("click", (e) => {
-        const isCloseBtn = e.target.closest(".modal-close-btn")
+        const isCloseBtn = e.target.closest(".modal__close-btn")
 
         if (e.target === modal || isCloseBtn) {
             modal.classList.add("hidden")
