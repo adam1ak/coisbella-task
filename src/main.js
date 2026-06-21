@@ -1,6 +1,6 @@
 import './scss/main.scss'
 import { fetchProducts } from './js/api.js'
-import { populateCategories, updateProductsCount, renderProducts, renderPagination } from './js/ui.js'
+import { populateCategories, updateProductsCount, renderProducts, renderPagination, renderModalContent } from './js/ui.js'
 import { debounce } from './js/utils.js'
 import { state } from './js/state.js'
 import { syncStateToURL, readStateFromURL } from './js/url.js'
@@ -107,6 +107,48 @@ function setupPaginationListener() {
     })
 }
 
+function setupModalOpenListener() {
+    const productsContainer = document.getElementById("products-container")
+    const modal = document.getElementById("product-modal")
+
+    if (!productsContainer || !modal) {
+        console.error("Missing DOM elements (products-container or product-modal)")
+        return
+    }
+
+    productsContainer.addEventListener("click", (e) => {
+        const card = e.target.closest(".product-card")
+        if (!card) return
+
+        const productId = parseInt(card.dataset.id)
+        const clickedProduct = state.products.find((p) => p.id === productId)
+
+        if (!clickedProduct) return
+
+        renderModalContent(clickedProduct)
+        modal.classList.remove("hidden")
+        modal.setAttribute("aria-hidden", "false")
+    })
+}
+
+function setupModalCloseListeners() {
+    const modal = document.getElementById("product-modal")
+
+    if (!modal) {
+        console.error("Missing DOM element product-modal")
+        return
+    }
+
+    modal.addEventListener("click", (e) => {
+        const isCloseBtn = e.target.closest(".modal-close-btn")
+
+        if (e.target === modal || isCloseBtn) {
+            modal.classList.add("hidden")
+            modal.setAttribute("aria-hidden", "true")
+        }
+    })
+}
+
 async function init() {
     const loader = document.getElementById("loader")
     const errorMessage = document.getElementById("error-message")
@@ -134,6 +176,9 @@ async function init() {
 
         setupFilterListeners()
         setupPaginationListener()
+
+        setupModalOpenListener()
+        setupModalCloseListeners()
 
         loader.classList.add("hidden")
     } catch (error) {

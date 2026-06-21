@@ -79,7 +79,7 @@ export function renderProducts(products) {
             </article>
         `
     }).join("")
-   
+
     container.innerHTML = cardsHTML
 }
 
@@ -110,7 +110,7 @@ export function renderPagination(totalItemsAmount, itemsPerPage, currentPage) {
         </button>
     `
 
-    for (let i = 1; i <= totalPages; i++){
+    for (let i = 1; i <= totalPages; i++) {
         const isActive = i === currentPage ? "pagination-btn--active" : ""
 
         html += `
@@ -120,11 +120,38 @@ export function renderPagination(totalItemsAmount, itemsPerPage, currentPage) {
         `
     }
 
-        html += `
+    html += `
         <button class="pagination-btn pagination-btn--next" data-page="${currentPage + 1}" ${currentPage === totalPages ? "disabled" : ""}>
         &gt;
         </button>
     `
 
     container.innerHTML = html
+}
+
+export function renderModalContent(product) {
+    if (!product) {
+        console.error("Missing product element")
+        return
+    }
+
+    const modal = document.getElementById("product-modal")
+
+    if (!modal) {
+        console.error("Missing DOM element: modal-body")
+        return
+    }
+
+    const priceFormatter = new Intl.NumberFormat("pl-PL", {
+        style: "currency",
+        currency: "PLN"
+    })
+
+    modal.innerHTML = `
+        <div class="modal-content" style="background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: 100px auto; position: relative;">
+            <button class="modal-close-btn" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</button>
+            <p>Nazwa z API: <strong>${product.name}</strong></p>
+            <p>Odczytane ID: #${product.id}</p>
+        </div>
+    `
 }
