@@ -1,11 +1,26 @@
+import { createPriceHTML } from "../utils/utils.js"
+
 function createProductCardHTML(product, priceFormatter) {
+    const formattedPriceHTML = createPriceHTML(product.price, priceFormatter, "product-card__price-decimals")
+    
     return `
-        <article class="product-card" data-id="${product.id}">
-            <div class="product-card__content">
-                <span class="product-card__id">#${product.id}</span>
-                <h3 class="product-card__title">${product.name}</h3>
-                <span class="product-card__category">${product.category}</span>
-                <p class="product-card__price">${priceFormatter.format(product.price)}</p>
+        <article class="product-card" data-id="${product.id}" aria-label="Otwórz szczegóły ${product.name}">
+            <div class="product-card__top">
+                <p class="product-card__category">${product.category}</p>
+
+                <div class="product-card__stock">
+                    <span class="stock-dot ${product.stock ? "stock-dot--available" : "stock-dot--empty"}" aria-hidden="true"></span>
+                    <p>${product.stock ? "Dostępny" : "Niedostępny"}</p>
+                </div>
+            </div>
+
+            <h3 class="product-card__name">${product.name}</h3>
+
+            <p class="product-card__price">${formattedPriceHTML}</p>
+
+            <div class="product-card__foot">
+                <p class="product-card__id">#${product.id}</p>
+                <p class="product-card__cta">Szczegóły</p>
             </div>
         </article>
     `
