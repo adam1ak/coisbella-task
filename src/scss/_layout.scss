@@ -1,0 +1,70 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #ffcccc;
+    flex-shrink: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: yellow;
+}
+
+.filters-section {
+    background-color: yellow;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #ffe6cc;
+}
+
+@media (min-width: 1280px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .page-wrapper {
+        flex-direction: row;
+        min-height: 0;
+        flex: 1;
+    }
+
+    .filters-section {
+        width: 300px;
+        flex-shrink: 0;
+    }
+
+    .page-content {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        background-color: green;
+        justify-content: space-between;
+    }
+
+}
