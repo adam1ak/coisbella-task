@@ -168,31 +168,33 @@ export function renderModalContent(product) {
                 <h2 class="modal__title">${product.name}</h2>
             </div>
 
-            <dl class="modal__body">
+            <div class="modal__body">
                 <h3 class="modal__price">${priceFormatter.format(product.price)}</h3>
 
-                <div class="modal__info-group">
-                    <dt class="modal__label">ID produktu</dt>
-                    <dd class="modal__value">${product.id}</dd>
-                </div>
+                <dl class="modal_spec">
+                    <div class="modal__spec-group">
+                        <dt class="modal__label">ID produktu</dt>
+                        <dd class="modal__value">${product.id}</dd>
+                    </div>
 
-                <div class="modal__info-group">
-                    <dt class="modal__label">Kategoria</dt>
-                    <dd class="modal__value">${product.category}</dd>
-                </div>
+                    <div class="modal__spec-group">
+                        <dt class="modal__label">Kategoria</dt>
+                        <dd class="modal__value">${product.category}</dd>
+                    </div>
 
-                <div class="modal__info-group">
-                    <dt class="modal__label">Opis</dt>
-                    <dd class="modal__value">${product.description || "Brak opisu dla tego produktu."}</dd>
-                </div>
+                    <div class="modal__spec-group">
+                        <dt class="modal__label">Opis</dt>
+                        <dd class="modal__value">${product.description || "Brak opisu dla tego produktu."}</dd>
+                    </div>
 
-                <div class="modal__info-group">
-                    <dt class="modal__label">Stan magazynowy</dt>
-                    <dd class="modal__value">${product.stock ? "Dostępny" : "Niedostępny"}</dd>
-                </div>
+                    <div class="modal__spec-group">
+                        <dt class="modal__label">Stan magazynowy</dt>
+                        <dd class="modal__value">${product.stock ? "Dostępny" : "Niedostępny"}</dd>
+                    </div>
+                </dl>
 
                 ${tagsSectionHTML}
-            </dl>
+            </div>
         </div>
     `
 }
