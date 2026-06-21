@@ -4,7 +4,6 @@
     padding: 0;
 }
 
-
 body {
     display: flex;
     flex-direction: column;
@@ -22,7 +21,6 @@ header {
     justify-content: space-between;
     margin-top: 8px;
     padding: 0 16px 8px;
-
     flex-shrink: 0;
 
     h1 {
@@ -54,123 +52,9 @@ header {
 }
 
 .filters-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
     margin-top: 8px;
     padding: 0 16px 8px;
     border-bottom: 1px solid $color-border-light;
-
-    .filter-group {
-        display: flex;
-        flex-direction: column;
-
-        label {
-            font-family: $font-mono;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: $color-text-muted;
-            margin-bottom: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-
-            &::before {
-                content: '';
-                width: 7px;
-                height: 2px;
-                background: $color-accent;
-                border-radius: 1px;
-            }
-        }
-    }
-    
-    select {
-        appearance: none;
-        background: $color-bg-card;
-        border: 1px solid $color-border-dark;
-        color: $color-text-main;
-        font-family: $font-body;
-        font-size: 0.85rem;
-        font-weight: 500;
-        padding: 4px 8px;
-        border-radius: 4px;
-        outline: none;
-        cursor: pointer;
-        width: 100%;
-        transition: $transition-smooth;
-
-        &:focus {
-            border-color: $color-accent;
-            box-shadow: 0 0 0 3px $color-accent-soft;
-        }
-
-        &.is-active {
-            color: $color-accent-hover;
-            font-weight: 600;
-        }
-
-        option {
-            background: $color-bg-card;
-            color: $color-text-main;
-
-            &:checked {
-                background-color: rgba($color-accent-soft, 0.1);
-                color: $color-accent-hover;
-                font-weight: 600;
-            }
-        }
-
-    }
-
-    input[type="number"] {
-        background: $color-bg-card;
-        border: 1px solid $color-border-dark;
-        color: $color-text-main;
-        font-family: $font-mono;
-        font-size: 0.85rem;
-        padding: 4px 12px;
-        border-radius: $radius-input;
-        outline: none;
-        transition: $transition-smooth;
-        margin-bottom: 0.5rem;
-
-        &::placeholder {
-            color: $color-text-light;
-        }
-
-        &:focus {
-            border-color: $color-accent;
-            box-shadow: 0 0 0 3px $color-accent-soft;
-        }
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            appearance: none;
-            margin: 0;
-        }
-        appearance: textfield;
-    }
-
-    #reset-btn {
-        align-self: flex-start;
-        background: none;
-        border: none;
-        font-family: $font-mono;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: $color-text-muted;
-        cursor: pointer;
-        padding: 0.25rem 0;
-        transition: color 0.12s;
-        display: inline-flex;
-        align-items: center;
-
-        &:hover {
-            color: $color-danger;
-        }
-    }
 }
 
 .page-content {
@@ -181,10 +65,12 @@ header {
 
 main {
     flex: 1;
+    padding: 2rem 2.25rem 4rem;
 }
 
 footer {
-    background-color: #ffe6cc;
+    background-color: $color-bg-card;
+    border-top: 1px solid $color-border-light;
 }
 
 @media (min-width: 1280px) {
@@ -200,11 +86,11 @@ footer {
     }
 
     .filters-section {
-        width: 275px;
+        width: 272px;
+        flex-shrink: 0;
         margin-top: 0;
         border-bottom: none;
         border-right: 1px solid $color-border-light;
-        flex-shrink: 0;
         padding: 1.75rem 1.5rem;
     }
 
@@ -212,8 +98,5 @@ footer {
         flex: 1;
         min-height: 0;
         overflow-y: auto;
-        background-color: green;
     }
-
 }
-
