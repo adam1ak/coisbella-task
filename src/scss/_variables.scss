@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+$color-bg-app: #FAFBFC;
+$color-bg-card: #FFFFFF;
+$color-bg-neutral: #F0F3F7;
+
+$color-border-light: #DDE3EA;
+$color-border-dark: #C7CFD9;
+
+$color-text-main: #16202B;
+$color-text-muted: #51606F;
+$color-text-light: #8B97A3;
+
+$color-accent: #2563EB;
+$color-accent-hover: #1D4ED8;
+$color-accent-soft: #EAF1FE;
+
+$color-success: #1A9655;
+$color-danger: #D5392E;
+
+$font-body: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+$font-mono: 'IBM Plex Mono', 'SF Mono', ui-monospace, monospace;
+
+$radius-card: 12px;
+$radius-input: 8px;
+$transition-smooth: all 0.2s ease-in-out;
