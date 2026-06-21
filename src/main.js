@@ -1,9 +1,12 @@
 import './scss/main.scss'
-import { fetchProducts } from './js/api.js'
-import { populateCategories, updateProductsCount, renderProducts, renderPagination, renderModalContent } from './js/ui.js'
-import { debounce } from './js/utils.js'
-import { state } from './js/state.js'
-import { syncStateToURL, readStateFromURL } from './js/url.js'
+import { fetchProducts } from './js/core/api.js'
+import { populateCategories } from './js/components/categories.js'
+import { updateProductsCount, renderProducts } from './js/components/products.js'
+import { renderPagination } from './js/components/pagination.js'
+import { renderModalContent } from './js/components/modal.js'
+import { state } from './js/core/state.js'
+import { debounce } from './js/utils/utils.js'
+import { syncStateToURL, readStateFromURL } from './js/utils/url.js'
 
 console.log("Main js loaded")
 
