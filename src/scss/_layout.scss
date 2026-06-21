@@ -8,13 +8,43 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: aqua;
     min-height: 100vh;
+    background-color: $color-bg-app;
+    color: $color-text-main;
+    font-family: $font-body;
 }
 
 header {
-    background-color: #ffcccc;
+    background-color: $color-bg-card;
+    border-bottom: 1px solid $color-border-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 16px 8px;
+
     flex-shrink: 0;
+
+    h1 {
+        font-family: $font-body;
+        font-size: 2rem;
+        font-weight: 700;
+        color: $color-text-main;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+    }
+
+    #products-count {
+        font-family: $font-mono;
+        font-size: 0.95rem;
+        color: $color-text-muted;
+        font-weight: 500;
+
+        span {
+            color: $color-accent;
+            font-weight: 700;
+        }
+    }
 }
 
 .page-wrapper {

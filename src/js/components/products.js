@@ -37,9 +37,9 @@ export function updateProductsCount(count) {
     let text = ""
     if (count <= 0) {
         text = "Nie znaleziono produktów"
-    } else text = `Znaleziono ${count} produktów`
+    } else text = `Znaleziono <span>${count}</span> produktów`
 
-    countElement.textContent = text
+    countElement.innerHTML = text
 }
 
 export function renderProducts(products) {
