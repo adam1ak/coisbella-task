@@ -1,30 +1,14 @@
-export function renderModalContent(product) {
-    if (!product) {
-        console.error("Missing product element")
-        return
-    }
+function createTagsHTML(tags) {
+    if (!tags || !Array.isArray(tags) || tags.length === 0) return ""
+    return `
+        <div class="modal__tags-container">
+            ${tags.map(tag => `<span class="modal__tag">${tag}</span>`).join("")}
+        </div>
+    `
+}
 
-    const modal = document.getElementById("product-modal")
-
-    if (!modal) {
-        console.error("Missing DOM element: modal-body")
-        return
-    }
-
-    const priceFormatter = new Intl.NumberFormat("pl-PL", {
-        style: "currency",
-        currency: "PLN"
-    })
-
-    const tagsSectionHTML = product.tags && Array.isArray(product.tags) && product.tags.length > 0
-        ? `
-            <div class="modal__tags-container">
-                ${product.tags.map(tag => `<span class="modal__tag">${tag} </span>`).join("")}
-            </div>
-        `
-        : ""
-
-    modal.innerHTML = `
+function createModalInnerHTML(product, priceFormatter, tagsSectionHTML) {
+    return `
         <div class="modal__content" role="document">
             <div class="modal__header">
                 <button class="modal__close-btn" aria-label="Zamknij szczegóły">&times;</button>
@@ -66,4 +50,26 @@ export function renderModalContent(product) {
             </div>
         </div>
     `
+}
+
+export function renderModalContent(product) {
+    if (!product) {
+        console.error("Missing product element")
+        return
+    }
+
+    const modal = document.getElementById("product-modal")
+
+    if (!modal) {
+        console.error("Missing DOM element: modal-body")
+        return
+    }
+
+    const priceFormatter = new Intl.NumberFormat("pl-PL", {
+        style: "currency",
+        currency: "PLN"
+    })
+
+    const tagsSectionHTML = createTagsHTML(product.tags)
+    modal.innerHTML = createModalInnerHTML(product, priceFormatter, tagsSectionHTML)
 }

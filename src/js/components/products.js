@@ -1,3 +1,16 @@
+function createProductCardHTML(product, priceFormatter) {
+    return `
+        <article class="product-card" data-id="${product.id}">
+            <div class="product-card__content">
+                <span class="product-card__id">#${product.id}</span>
+                <h3 class="product-card__title">${product.name}</h3>
+                <span class="product-card__category">${product.category}</span>
+                <p class="product-card__price">${priceFormatter.format(product.price)}</p>
+            </div>
+        </article>
+    `
+}
+
 export function updateProductsCount(count) {
     const countElement = document.getElementById("products-count")
 
@@ -41,18 +54,5 @@ export function renderProducts(products) {
         currency: "PLN"
     })
 
-    const cardsHTML = products.map((product) => {
-        return `
-            <article class="product-card" data-id="${product.id}">
-                <div class="product-card__content">
-                    <span class="product-card__id">#${product.id}</span>
-                    <h3 class="product-card__title">${product.name}</h3>
-                    <span class="product-card__category">${product.category}</span>
-                    <p class="product-card__price">${priceFormatter.format(product.price)}</p>
-                </div>
-            </article>
-        `
-    }).join("")
-
-    container.innerHTML = cardsHTML
+    container.innerHTML = products.map((product) => createProductCardHTML(product, priceFormatter)).join("")
 }
