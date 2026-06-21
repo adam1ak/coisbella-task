@@ -1,4 +1,4 @@
-import { state } from './state.js'
+import { state } from '../core/state'
 
 export function syncStateToURL() {
     const url = new URL(window.location)
