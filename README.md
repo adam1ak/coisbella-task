@@ -1,5 +1,7 @@
 # Zadanie rekrutacyjne - Cosibella
 
+**Live demo:** [adam1ak.github.io/coisbella-task](https://adam1ak.github.io/coisbella-task/)
+
 Aplikacja katalogu produktów stworzona w czystym JavaScript (Vanilla JS ES6+) z modularną architekturą Sass. Pobiera dane z API i wyświetla je w interaktywnej siatce z filtrami, sortowaniem, paginacją i synchronizacją stanu przez URL.
 
 ---
