@@ -10,7 +10,8 @@ export const state = {
     filters: {
         category: "",
         minPrice: "",
-        maxPrice: ""
+        maxPrice: "",
+        sortBy: "default"
     },
 
     // layout config
