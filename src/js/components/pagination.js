@@ -1,5 +1,5 @@
 export function renderPagination(totalItemsAmount, itemsPerPage, currentPage) {
-    if (!totalItemsAmount || itemsPerPage < 0 || currentPage < 0) {
+    if (totalItemsAmount == null || itemsPerPage <= 0 || currentPage <= 0) {
         console.error("Some attributes are wrong")
         return
     }
@@ -8,6 +8,7 @@ export function renderPagination(totalItemsAmount, itemsPerPage, currentPage) {
 
     if (!container) {
         console.error("Missing DOM element: pagination container")
+        return
     }
 
     const totalPages = Math.ceil(totalItemsAmount / itemsPerPage)

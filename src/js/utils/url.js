@@ -39,7 +39,7 @@ export function syncStateToURL() {
         url.searchParams.delete("productId")
     }
 
-    window.history.pushState({}, "", url)
+    window.history.replaceState({}, "", url)
 }
 
 export function readStateFromURL() {

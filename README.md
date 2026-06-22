@@ -109,5 +109,5 @@ cosibella-task/
 ## Dane zgłoszeniowe
 
 - **Imię i nazwisko:** Filip Adamiak
-- **E-mail:** [email](f.admiakk@gmail.com)
+- **E-mail:** [f.admiakk@gmail.com](mailto:f.admiakk@gmail.com)
 - **GitHub:** [adam1ak](https://github.com/adam1ak)

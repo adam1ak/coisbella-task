@@ -9,7 +9,8 @@ import {
     setupPaginationListener, 
     setupModalOpenListener, 
     setupModalCloseListeners,
-    checkAndOpenModalFromURL
+    checkAndOpenModalFromURL,
+    setupPopstateListener
 } from './js/core/events.js'
 
 async function init() {
@@ -39,6 +40,7 @@ async function init() {
         setupPaginationListener()
         setupModalOpenListener()
         setupModalCloseListeners()
+        setupPopstateListener()
 
         checkAndOpenModalFromURL()
 

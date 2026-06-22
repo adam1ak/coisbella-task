@@ -1,5 +1,10 @@
 import { createPriceHTML } from "../utils/utils.js"
 
+const priceFormatter = new Intl.NumberFormat("pl-PL", {
+    style: "currency",
+    currency: "PLN"
+})
+
 function createProductCardHTML(product, priceFormatter) {
     const formattedPriceHTML = createPriceHTML(product.price, priceFormatter, "product-card__price-decimals")
 
@@ -63,11 +68,6 @@ export function renderProducts(products) {
     }
 
     if (noResultsElement) noResultsElement.classList.add("hidden")
-
-    const priceFormatter = new Intl.NumberFormat("pl-PL", {
-        style: "currency",
-        currency: "PLN"
-    })
 
     container.innerHTML = products.map((product) => createProductCardHTML(product, priceFormatter)).join("")
 }
