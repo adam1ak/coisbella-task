@@ -9,10 +9,9 @@ import {
     setupPaginationListener, 
     setupModalOpenListener, 
     setupModalCloseListeners,
-    checkAndOpenModalFromURL
+    checkAndOpenModalFromURL,
+    setupPopstateListener
 } from './js/core/events.js'
-
-console.log("Main js loaded")
 
 async function init() {
     const loader = document.getElementById("loader")
@@ -32,8 +31,6 @@ async function init() {
         state.products = fetchedData
         state.filteredProducts = fetchedData
 
-        console.log("Application state initialized successfully:", state)
-
         populateCategories(state.products)
 
         readStateFromURL()
@@ -43,6 +40,7 @@ async function init() {
         setupPaginationListener()
         setupModalOpenListener()
         setupModalCloseListeners()
+        setupPopstateListener()
 
         checkAndOpenModalFromURL()
 

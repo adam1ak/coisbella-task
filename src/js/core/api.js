@@ -5,13 +5,13 @@ export async function fetchProducts() {
         const response = await fetch(API_URL)
 
         if (!response.ok){
-            throw new Error("Connection error: ", response.status)
+            throw new Error(`Connection error: ${response.status}`)
         }
 
         const data = await response.json()
         return data
     } catch (error) {
-        console.error("Error fetchin data from API: ", error)
+        console.error("Error fetching data from API: ", error)
         
         throw error
     }

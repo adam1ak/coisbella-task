@@ -14,8 +14,6 @@ export function populateCategories(products) {
     const allCategories = products.map((p) => p.category)
     const uniqueCategories = [...new Set(allCategories)]
 
-    console.log("Categories: ", uniqueCategories)
-
     uniqueCategories.forEach((cat) => {
         const option = document.createElement("option")
         option.value = cat

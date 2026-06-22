@@ -1,6 +1,6 @@
 import { state } from './state.js'
 import { debounce } from '../utils/utils.js'
-import { syncStateToURL } from '../utils/url.js'
+import { syncStateToURL, readStateFromURL } from '../utils/url.js'
 import { renderProducts, updateProductsCount } from '../components/products.js'
 import { renderPagination } from '../components/pagination.js'
 import { renderModalContent } from '../components/modal.js'
@@ -56,8 +56,6 @@ export function applyFilters(resetPage = true) {
 
     state.filteredProducts = processedProducts
 
-    console.log("Filters and Sorting applied: ", state.filteredProducts)
-
     const categorySelect = document.getElementById("category-select")
     if (categorySelect) {
         if (state.filters.category !== "") categorySelect.classList.add("is-active")
@@ -82,7 +80,7 @@ export function setupFilterListeners() {
     const sortSelect = document.getElementById("sort-select")
     const resetBtn = document.getElementById("reset-btn")
 
-    if (!categorySelect || !priceMinInput || !priceMaxInput || !resetBtn) {
+    if (!categorySelect || !priceMinInput || !priceMaxInput || !sortSelect || !resetBtn) {
         console.error("Filter DOM elements are missing")
         return
     }
@@ -179,13 +177,22 @@ export function setupModalCloseListeners() {
     modal.addEventListener("click", (e) => {
         const isCloseBtn = e.target.closest(".modal__close-btn")
         if (e.target === modal || isCloseBtn) {
-            state.activeProductId = null
-            syncStateToURL()
-
-            modal.classList.add("hidden")
-            modal.setAttribute("aria-hidden", "true")
+            closeModal(modal)
         }
     })
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+            closeModal(modal)
+        }
+    })
+}
+
+function closeModal(modal) {
+    state.activeProductId = null
+    syncStateToURL()
+    modal.classList.add("hidden")
+    modal.setAttribute("aria-hidden", "true")
 }
 
 export function checkAndOpenModalFromURL() {
@@ -207,4 +214,12 @@ export function checkAndOpenModalFromURL() {
         modal.classList.remove("hidden")
         modal.setAttribute("aria-hidden", "false")
     }
+}
+
+export function setupPopstateListener() {
+    window.addEventListener("popstate", () => {
+        readStateFromURL()
+        applyFilters(false)
+        checkAndOpenModalFromURL()
+    })
 }

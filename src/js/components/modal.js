@@ -1,5 +1,10 @@
 import { createPriceHTML } from "../utils/utils.js"
 
+const priceFormatter = new Intl.NumberFormat("pl-PL", {
+    style: "currency",
+    currency: "PLN"
+})
+
 function createTagsHTML(tags) {
     if (!tags || !Array.isArray(tags) || tags.length === 0) return ""
     return `
@@ -55,11 +60,6 @@ export function renderModalContent(product) {
         console.error("Missing DOM element: modal-body")
         return
     }
-
-    const priceFormatter = new Intl.NumberFormat("pl-PL", {
-        style: "currency",
-        currency: "PLN"
-    })
 
     const tagsSectionHTML = createTagsHTML(product.tags)
     modal.innerHTML = createModalInnerHTML(product, priceFormatter, tagsSectionHTML)
