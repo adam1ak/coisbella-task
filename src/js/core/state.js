@@ -17,5 +17,7 @@ export const state = {
     pagination: {
         currentPage: 1,
         itemsPerPage: 5
-    }
+    },
+
+    activeProductId: null
 }

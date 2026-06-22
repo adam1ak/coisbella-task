@@ -126,6 +126,9 @@ export function setupModalOpenListener() {
 
         if (!clickedProduct) return
 
+        state.activeProductId = productId
+        syncStateToURL()
+
         renderModalContent(clickedProduct)
         modal.classList.remove("hidden")
         modal.setAttribute("aria-hidden", "false")
@@ -142,8 +145,24 @@ export function setupModalCloseListeners() {
     modal.addEventListener("click", (e) => {
         const isCloseBtn = e.target.closest(".modal__close-btn")
         if (e.target === modal || isCloseBtn) {
+            state.activeProductId = null
+            syncStateToURL()
+
             modal.classList.add("hidden")
             modal.setAttribute("aria-hidden", "true")
         }
     })
+}
+
+export function checkAndOpenModalFromURL() {
+    if (!state.activeProductId) return
+
+    const matchedProduct = state.products.find((p) => p.id === state.activeProductId)
+    const modal = document.getElementById("product-modal")
+
+    if (matchedProduct && modal) {
+        renderModalContent(matchedProduct)
+        modal.classList.remove("hidden")
+        modal.setAttribute("aria-hidden", "false")
+    }
 }

@@ -27,6 +27,12 @@ export function syncStateToURL() {
         url.searchParams.delete("page")
     }
 
+    if (state.activeProductId) {
+        url.searchParams.set("productId", state.activeProductId)
+    } else {
+        url.searchParams.delete("productId")
+    }
+
     window.history.pushState({}, "", url)
 }
 
@@ -37,6 +43,9 @@ export function readStateFromURL() {
     state.filters.minPrice = params.get("minPrice") || ""
     state.filters.maxPrice = params.get("maxPrice") || ""
     state.pagination.currentPage = parseInt(params.get("page")) || 1
+
+    const urlProductId = params.get("productId")
+    state.activeProductId = urlProductId ? parseInt(urlProductId) : null
 
     const categorySelect = document.getElementById("category-select")
     const priceMinInput = document.getElementById("price-min")
