@@ -25,7 +25,7 @@
         position: absolute;
         width: 5px;
         height: 5px;
-        border-radius: 14px;
+        border-radius: 50%;
         background: $color-border-dark;
         transition: background 0.15s;
     }
@@ -67,37 +67,6 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: $color-text-muted;
-}
-
-.product-card__stock {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-
-    p {
-        font-family: $font-mono;
-        font-size: 0.70rem;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: $color-text-light;
-    }
-}
-
-.stock-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 14px;
-    flex-shrink: 0;
-
-    &--available {
-        background: $color-success;
-    }
-
-    &--empty {
-        background: $color-danger;
-    }
 }
 
 .product-card__name {

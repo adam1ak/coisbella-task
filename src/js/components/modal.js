@@ -29,15 +29,15 @@ function createModalInnerHTML(product, priceFormatter, tagsSectionHTML) {
 
             <div class="modal__price-row">
                 <p class="modal__price">${formattedPriceHTML}</p>
-
-                <div class="modal__stock">
-                    <span class="stock-dot ${product.stock ? "stock-dot--available" : "stock-dot--empty"}" aria-hidden="true"></span>
-                    <p>${product.stock ? "na stanie" : "brak produktu"}</p>
+                
+                <div class="stock-status ${product.stock ? "stock-status--available" : "stock-status--empty"}">
+                    <span class="stock-status__dot" aria-hidden="true"></span>
+                    <p class="stock-status__text">${product.stock ? "na stanie" : "brak produktu"}</p>
                 </div>
             </div>
 
             <div class="modal__body">
-                <p class="modal_desc">${product.description}</p>
+                <p class="modal__desc">${product.description}</p>
             </div>
         </div>
     `

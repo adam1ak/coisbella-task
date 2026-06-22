@@ -2,15 +2,15 @@ import { createPriceHTML } from "../utils/utils.js"
 
 function createProductCardHTML(product, priceFormatter) {
     const formattedPriceHTML = createPriceHTML(product.price, priceFormatter, "product-card__price-decimals")
-    
+
     return `
         <article class="product-card" data-id="${product.id}" aria-label="Otwórz szczegóły ${product.name}">
             <div class="product-card__top">
                 <p class="product-card__category">${product.category}</p>
 
-                <div class="product-card__stock">
-                    <span class="stock-dot ${product.stock ? "stock-dot--available" : "stock-dot--empty"}" aria-hidden="true"></span>
-                    <p>${product.stock ? "Dostępny" : "Niedostępny"}</p>
+                <div class="stock-status ${product.stock ? "stock-status--available" : "stock-status--empty"}">
+                    <span class="stock-status__dot" aria-hidden="true"></span>
+                    <p class="stock-status__text">${product.stock ? "Dostępny" : "Niedostępny"}</p>
                 </div>
             </div>
 

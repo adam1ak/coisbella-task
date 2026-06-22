@@ -4,6 +4,8 @@
 @use "./components/filters";
 @use "./components/cards";
 @use "./components/pagination";
+@use "./components/modal";
+@use "./components/stock";
 
 .hidden {
     display: none !important;
