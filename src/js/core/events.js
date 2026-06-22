@@ -56,8 +56,6 @@ export function applyFilters(resetPage = true) {
 
     state.filteredProducts = processedProducts
 
-    console.log("Filters and Sorting applied: ", state.filteredProducts)
-
     const categorySelect = document.getElementById("category-select")
     if (categorySelect) {
         if (state.filters.category !== "") categorySelect.classList.add("is-active")

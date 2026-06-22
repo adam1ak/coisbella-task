@@ -12,8 +12,6 @@ import {
     checkAndOpenModalFromURL
 } from './js/core/events.js'
 
-console.log("Main js loaded")
-
 async function init() {
     const loader = document.getElementById("loader")
     const errorMessage = document.getElementById("error-message")
@@ -31,8 +29,6 @@ async function init() {
 
         state.products = fetchedData
         state.filteredProducts = fetchedData
-
-        console.log("Application state initialized successfully:", state)
 
         populateCategories(state.products)
 
