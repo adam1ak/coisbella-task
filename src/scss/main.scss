@@ -1,9 +1,9 @@
-@import "variables";
+@use "variables" as *;
 
-@import "layout";
-@import "./components/filters";
-@import "./components/cards";
-@import "./components/pagination";
+@use "layout";
+@use "./components/filters";
+@use "./components/cards";
+@use "./components/pagination";
 
 .hidden {
     display: none !important;
