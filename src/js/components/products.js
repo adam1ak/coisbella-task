@@ -49,6 +49,7 @@ export function renderProducts(products) {
     }
 
     const container = document.getElementById("products-container")
+    const noResultsElement = document.getElementById("no-results")
 
     if (!container) {
         console.log("Missing DOM element: products-container")
@@ -56,13 +57,12 @@ export function renderProducts(products) {
     }
 
     if (products.length === 0) {
-        container.innerHTML = `
-            <div class="no-results-feedback" role="alert">
-                Brak produktów spełniających wybrane kryteria.
-            </div>
-        `
+        container.innerHTML = ""
+        if (noResultsElement) noResultsElement.classList.remove("hidden")
         return
     }
+
+    if (noResultsElement) noResultsElement.classList.add("hidden")
 
     const priceFormatter = new Intl.NumberFormat("pl-PL", {
         style: "currency",

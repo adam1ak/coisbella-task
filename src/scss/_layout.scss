@@ -67,7 +67,7 @@ header {
 
 main {
     flex: 1;
-    padding: 2rem 2.25rem 4rem;
+    padding: 1rem;
 }
 
 footer {
@@ -100,5 +100,9 @@ footer {
         flex: 1;
         min-height: 0;
         overflow-y: auto;
+    }
+
+    main {
+        padding: 2rem 2.25rem 4rem;
     }
 }
