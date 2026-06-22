@@ -1,0 +1,120 @@
+@use "../variables" as *;
+
+.filters-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            font-family: $font-mono;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: $color-text-muted;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+
+            &::before {
+                content: '';
+                width: 7px;
+                height: 2px;
+                background: $color-accent;
+                border-radius: 1px;
+            }
+        }
+    }
+    
+    select {
+        appearance: none;
+        background: $color-bg-card;
+        border: 1px solid $color-border-dark;
+        color: $color-text-main;
+        font-family: $font-body;
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 4px 8px;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        width: 100%;
+        transition: $transition-smooth;
+
+        &:focus {
+            border-color: $color-accent;
+            box-shadow: 0 0 0 3px $color-accent-soft;
+        }
+
+        &.is-active {
+            background-color: $color-accent-soft;
+            border-color: $color-accent;
+            color: $color-accent-hover;
+            font-weight: 600;
+        }
+
+        option {
+            background: $color-bg-card;
+            color: $color-text-main;
+
+            &:checked {
+                background-color: $color-accent-soft;
+                color: $color-accent-hover !important;
+                font-weight: 600;
+            }
+        }
+    }
+
+    input[type="number"] {
+        background: $color-bg-card;
+        border: 1px solid $color-border-dark;
+        color: $color-text-main;
+        font-family: $font-mono;
+        font-size: 0.85rem;
+        padding: 4px 12px;
+        border-radius: $radius-input;
+        outline: none;
+        transition: $transition-smooth;
+        margin-bottom: 0.5rem;
+
+        &::placeholder {
+            color: $color-text-light;
+        }
+
+        &:focus {
+            border-color: $color-accent;
+            box-shadow: 0 0 0 3px $color-accent-soft;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+        appearance: textfield;
+    }
+
+    #reset-btn {
+        align-self: flex-start;
+        background: none;
+        border: none;
+        font-family: $font-mono;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: $color-text-muted;
+        cursor: pointer;
+        padding: 0.25rem 0;
+        transition: color 0.12s;
+        display: inline-flex;
+        align-items: center;
+
+        &:hover {
+            color: $color-danger;
+        }
+    }
+}

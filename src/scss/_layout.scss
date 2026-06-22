@@ -1,0 +1,108 @@
+@use "./variables" as *;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: $color-bg-app;
+    color: $color-text-main;
+    font-family: $font-body;
+}
+
+header {
+    background-color: $color-bg-card;
+    border-bottom: 1px solid $color-border-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 0 16px 8px;
+    flex-shrink: 0;
+
+    h1 {
+        font-family: $font-body;
+        font-size: 2rem;
+        font-weight: 700;
+        color: $color-text-main;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+    }
+
+    #products-count {
+        font-family: $font-mono;
+        font-size: 0.95rem;
+        color: $color-text-muted;
+        font-weight: 500;
+
+        span {
+            color: $color-accent;
+            font-weight: 700;
+        }
+    }
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.filters-section {
+    margin-top: 8px;
+    padding: 0 16px 8px;
+    border-bottom: 1px solid $color-border-light;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+main {
+    flex: 1;
+    padding: 1rem;
+}
+
+footer {
+    background-color: $color-bg-card;
+    border-top: 1px solid $color-border-light;
+}
+
+@media (min-width: 1280px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .page-wrapper {
+        flex-direction: row;
+        min-height: 0;
+        flex: 1;
+    }
+
+    .filters-section {
+        width: 272px;
+        flex-shrink: 0;
+        margin-top: 0;
+        border-bottom: none;
+        border-right: 1px solid $color-border-light;
+        padding: 1.75rem 1.5rem;
+    }
+
+    .page-content {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+    }
+
+    main {
+        padding: 2rem 2.25rem 4rem;
+    }
+}
