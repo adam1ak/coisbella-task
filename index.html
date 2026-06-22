@@ -35,6 +35,19 @@
                 <input type="number" id="price-max" min="0" placeholder="do">
             </div>
 
+            <div class="filter-group">
+                <label for="sort-select">Sortowanie</label>
+                <select id="sort-select">
+                    <option value="default">Domyślnie</option>
+                    <option value="name-asc">Nazwa: A-Z</option>
+                    <option value="name-desc">Nazwa: Z-A</option>
+                    <option value="price-asc">Cena: od najniższej</option>
+                    <option value="price-desc">Cena: od najwyższej</option>
+                    <option value="stock-asc">Dostępność: najpierw dostępne</option>
+                    <option value="stock-desc">Dostępność: najpierw brak na stanie</option>
+                </select>
+            </div>
+
             <button id="reset-btn">
                 Resetuj filtry
             </button>
@@ -47,7 +60,7 @@
                     <div id="error-message" class="hidden">Wystapil blad podczas ładowania danych.</div>
                     <div id="no-results" class="hidden">Nie moglismy znaleźć produktów, których szukasz</div>
                 </section>
-                
+
                 <section class="products-section" aria-label="Lista produktow">
                     <div id="products-container"></div>
                 </section>

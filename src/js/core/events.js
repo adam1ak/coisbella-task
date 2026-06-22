@@ -21,7 +21,7 @@ export function updateDisplay() {
 }
 
 export function applyFilters(resetPage = true) {
-    state.filteredProducts = state.products.filter((product) => {
+    let processedProducts = state.products.filter((product) => {
         const matchCategory = state.filters.category === "" || product.category === state.filters.category
 
         const minPrice = state.filters.minPrice === "" ? 0 : parseFloat(state.filters.minPrice)
@@ -33,15 +33,41 @@ export function applyFilters(resetPage = true) {
         return matchCategory && matchMinPrice && matchMaxPrice
     })
 
-    console.log("Filters applied: ", state.filteredProducts)
+    if (state.filters.sortBy !== "default") {
+        processedProducts.sort((a, b) => {
+            switch (state.filters.sortBy) {
+                case "name-asc":
+                    return a.name.localeCompare(b.name, "pl")
+                case "name-desc":
+                    return b.name.localeCompare(a.name, "pl")
+                case "price-asc":
+                    return a.price - b.price
+                case "price-desc":
+                    return b.price - a.price
+                case "stock-asc":
+                    return b.stock - a.stock
+                case "stock-desc":
+                    return a.stock - b.stock
+                default:
+                    return 0
+            }
+        })
+    }
+
+    state.filteredProducts = processedProducts
+
+    console.log("Filters and Sorting applied: ", state.filteredProducts)
 
     const categorySelect = document.getElementById("category-select")
     if (categorySelect) {
-        if (state.filters.category !== "") {
-            categorySelect.classList.add("is-active")
-        } else {
-            categorySelect.classList.remove("is-active")
-        }
+        if (state.filters.category !== "") categorySelect.classList.add("is-active")
+        else categorySelect.classList.remove("is-active")
+    }
+
+    const sortSelect = document.getElementById("sort-select")
+    if (sortSelect) {
+        if (state.filters.sortBy !== "default") sortSelect.classList.add("is-active")
+        else sortSelect.classList.remove("is-active")
     }
 
     if (resetPage) state.pagination.currentPage = 1
@@ -53,6 +79,7 @@ export function setupFilterListeners() {
     const categorySelect = document.getElementById("category-select")
     const priceMinInput = document.getElementById("price-min")
     const priceMaxInput = document.getElementById("price-max")
+    const sortSelect = document.getElementById("sort-select")
     const resetBtn = document.getElementById("reset-btn")
 
     if (!categorySelect || !priceMinInput || !priceMaxInput || !resetBtn) {
@@ -63,6 +90,11 @@ export function setupFilterListeners() {
     categorySelect.addEventListener("change", (e) => {
         state.filters.category = e.target.value
         applyFilters()
+    })
+
+    sortSelect.addEventListener("change", (e) => {
+        state.filters.sortBy = e.target.value
+        applyFilters(false)
     })
 
     const debouncedApplyFilters = debounce(applyFilters, 300)
@@ -81,10 +113,12 @@ export function setupFilterListeners() {
         state.filters.category = ""
         state.filters.minPrice = ""
         state.filters.maxPrice = ""
+        state.filters.sortBy = "default"
 
         categorySelect.value = ""
         priceMinInput.value = ""
         priceMaxInput.value = ""
+        sortSelect.value = "default"
 
         applyFilters()
     })
@@ -121,10 +155,13 @@ export function setupModalOpenListener() {
         const card = e.target.closest(".product-card")
         if (!card) return
 
-        const productId = parseInt(card.dataset.id)
-        const clickedProduct = state.products.find((p) => p.id === productId)
+        const productId = card.dataset.id
+        const clickedProduct = state.products.find((p) => String(p.id) === String(productId))
 
         if (!clickedProduct) return
+
+        state.activeProductId = productId
+        syncStateToURL()
 
         renderModalContent(clickedProduct)
         modal.classList.remove("hidden")
@@ -142,8 +179,32 @@ export function setupModalCloseListeners() {
     modal.addEventListener("click", (e) => {
         const isCloseBtn = e.target.closest(".modal__close-btn")
         if (e.target === modal || isCloseBtn) {
+            state.activeProductId = null
+            syncStateToURL()
+
             modal.classList.add("hidden")
             modal.setAttribute("aria-hidden", "true")
         }
     })
+}
+
+export function checkAndOpenModalFromURL() {
+    if (!state.activeProductId) return
+
+    const matchedProduct = state.products.find((p) => String(p.id) === String(state.activeProductId))
+    const modal = document.getElementById("product-modal")
+
+    if (!matchedProduct) {
+        console.warn(`Product with ID ${state.activeProductId} not found. Cleaning URL parameter.`);
+        
+        state.activeProductId = null
+        syncStateToURL()
+        return
+    }
+
+    if (modal) {
+        renderModalContent(matchedProduct)
+        modal.classList.remove("hidden")
+        modal.setAttribute("aria-hidden", "false")
+    }
 }

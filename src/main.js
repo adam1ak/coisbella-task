@@ -8,7 +8,8 @@ import {
     setupFilterListeners, 
     setupPaginationListener, 
     setupModalOpenListener, 
-    setupModalCloseListeners 
+    setupModalCloseListeners,
+    checkAndOpenModalFromURL
 } from './js/core/events.js'
 
 console.log("Main js loaded")
@@ -42,6 +43,8 @@ async function init() {
         setupPaginationListener()
         setupModalOpenListener()
         setupModalCloseListeners()
+
+        checkAndOpenModalFromURL()
 
         loader.classList.add("hidden")
     } catch (error) {

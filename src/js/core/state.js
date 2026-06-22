@@ -10,12 +10,15 @@ export const state = {
     filters: {
         category: "",
         minPrice: "",
-        maxPrice: ""
+        maxPrice: "",
+        sortBy: "default"
     },
 
     // layout config
     pagination: {
         currentPage: 1,
         itemsPerPage: 5
-    }
+    },
+
+    activeProductId: null
 }
